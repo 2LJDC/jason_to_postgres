@@ -24,20 +24,20 @@ pub async fn dump_database(url: &str) -> String {
 
 
 
-pub async fn del_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
+pub async fn del_customer(status: &str, url: String) -> Result<(), Box<dyn stdError>> {
     let pool = match sqlx::postgres::PgPool::connect(&url).await {
         Ok(p) => p,
         Err(e) => return Err(Box::new(e)),
     };
 
-    let parts = c_string.split("|");
-    let data: Vec<&str> = parts.collect();
+    //let parts = c_string.split("|");
+    //let data: Vec<&str> = parts.collect();
 
     //let query = "INSERT INTO kunde (Nachricht) VALUES ($1)";
-    let query = "DELETE FROM kunde WHERE (Nachricht) VALUES ($1)";
+    let query = "DELETE FROM kunde WHERE (Status) VALUES ($1)";
 
     match sqlx::query(query)
-        .bind(&data[2].to_string())
+        .bind(&status.to_string())
         .execute(&pool).await {
         Ok(_) => Ok(()),
         Err(e) => Err(Box::new(e)),
