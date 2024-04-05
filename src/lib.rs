@@ -41,7 +41,7 @@ pub async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn s
     let data: Vec<&str> = parts.collect();
 
     let query = "INSERT INTO kunde (Kundennummer, Name, Email, Nachricht, Status) VALUES ($1, $2, $3, $4, $5)";
-    match sqlx::query(query)
+    sqlx::query(query)
         .bind("0".to_string())
         .bind(&data[0].to_string())
         .bind(&data[1].to_string())
