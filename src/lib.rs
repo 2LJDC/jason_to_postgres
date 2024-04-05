@@ -2,7 +2,7 @@ use std::error::Error as stdError;
 
 
 pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
-    let pool = match sqlx::postgres::PgPool::connect(&url).await?;
+    let pool = sqlx::postgres::PgPool::connect(&url).await?;
 
     let row: Vec<(String, String, String, String, String,)> = sqlx::query_as("SELECT * FROM kunde")
         .fetch_all(&pool).await?;
@@ -21,10 +21,7 @@ pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
 
 
 pub async fn del_customer(status: &str, url: String) -> Result<(), Box<dyn stdError>> {
-    let pool = match sqlx::postgres::PgPool::connect(&url).await {
-        Ok(p) => p,
-        Err(e) => return Err(Box::new(e)),
-    };
+    let pool = sqlx::postgres::PgPool::connect(&url).await?;
 
     let query = "DELETE FROM kunde WHERE (Status) VALUES ($1)";
 
@@ -38,10 +35,7 @@ pub async fn del_customer(status: &str, url: String) -> Result<(), Box<dyn stdEr
 
 
 pub async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
-    let pool = match sqlx::postgres::PgPool::connect(&url).await {
-        Ok(p) => p,
-        Err(e) => return Err(Box::new(e)),
-    };
+    let pool = sqlx::postgres::PgPool::connect(&url).await?;
 
     let parts = c_string.split("|");
     let data: Vec<&str> = parts.collect();
