@@ -1,7 +1,7 @@
 use std::error::Error as stdError;
 
 
-async fn dump_database(url: &str) -> String {
+async pub fn dump_database(url: &str) -> String {
     let pool = match sqlx::postgres::PgPool::connect(&url).await {
         Ok(p) => p,
         Err(_) => return "no database".to_string(),
