@@ -25,7 +25,7 @@ pub async fn del_customer(status: &str, url: String) -> Result<(), Box<dyn stdEr
 
     let query = "DELETE FROM kunde WHERE (Status) VALUES ($1)";
 
-    match sqlx::query(query)
+    sqlx::query(query)
         .bind(&status.to_string())
         .execute(&pool).await?;
     Ok(())
