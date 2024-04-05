@@ -39,11 +39,10 @@ pub async fn del_customer(s: &str, url: &str) -> Result<(), Box<dyn stdError>> {
     let data = json::parse(&s).unwrap();
 
     //{id, vorname, nachname, mail, subscription, top, middl, bottom, status"}
-    //let query = "DELETE FROM kunde WHERE id = $1 AND vorname = $2 AND nachname = $3 AND mail = $4 AND subscription = $5 AND top = $6 AND middl = $7 AND bottom = $8 AND status = $9";
-    let query = "DELETE FROM kunde WHERE vorname = $2 AND nachname = $3 AND mail = $4 AND subscription = $5 AND top = $6 AND middl = $7 AND bottom = $8 AND status = $9";
+    let query = "DELETE FROM kunde WHERE id = $1 AND vorname = $2 AND nachname = $3 AND mail = $4 AND subscription = $5 AND top = $6 AND middl = $7 AND bottom = $8 AND status = $9";
 
     sqlx::query(query)
-        //.bind(&data["id"].to_string())
+        .bind(&data["id"].to_string())
         .bind(&data["vorname"].to_string())
         .bind(&data["nachname"].to_string())
         .bind(&data["mail"].to_string())
