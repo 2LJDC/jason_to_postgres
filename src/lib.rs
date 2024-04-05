@@ -2,14 +2,10 @@ use std::error::Error as stdError;
 
 
 pub async fn dump_database(url: &str) -> String {
-    let pool = match sqlx::postgres::PgPool::connect(&url).await {
-        Ok(p) => p,
-        Err(_) => return "no database".to_string(),
-        //Err(_) => panic!("lel1"),
-    };
+    let pool = match sqlx::postgres::PgPool::connect(&url).await?;
 
     let row: Vec<(String, String, String, String, String,)> = sqlx::query_as("SELECT * FROM kunde")
-        .fetch_all(&pool).await.expect("nono square");
+        .fetch_all(&pool).await?;
 
     let mut arr = "".to_string();
 
@@ -30,18 +26,11 @@ pub async fn del_customer(status: &str, url: String) -> Result<(), Box<dyn stdEr
         Err(e) => return Err(Box::new(e)),
     };
 
-    //let parts = c_string.split("|");
-    //let data: Vec<&str> = parts.collect();
-
-    //let query = "INSERT INTO kunde (Nachricht) VALUES ($1)";
     let query = "DELETE FROM kunde WHERE (Status) VALUES ($1)";
 
     match sqlx::query(query)
         .bind(&status.to_string())
-        .execute(&pool).await {
-        Ok(_) => Ok(()),
-        Err(e) => Err(Box::new(e)),
-    }
+        .execute(&pool).await?;
 
 }
 
@@ -64,10 +53,7 @@ pub async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn s
         .bind(&data[1].to_string())
         .bind(&data[2].to_string())
         .bind("nix".to_string())
-        .execute(&pool).await {
-        Ok(_) => Ok(()),
-        Err(e) => Err(Box::new(e)),
-    }
+        .execute(&pool).await?;
 
 }
 
