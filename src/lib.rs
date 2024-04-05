@@ -48,6 +48,6 @@ pub async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn s
         .bind(&data[2].to_string())
         .bind("nix".to_string())
         .execute(&pool).await?;
-    OK(())
+    Ok(())
 }
 
