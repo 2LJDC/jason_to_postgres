@@ -31,7 +31,7 @@ pub async fn del_customer(status: &str, url: String) -> Result<(), Box<dyn stdEr
     match sqlx::query(query)
         .bind(&status.to_string())
         .execute(&pool).await?;
-
+    Ok(())
 }
 
 
