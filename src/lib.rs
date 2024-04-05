@@ -1,7 +1,7 @@
 use std::error::Error as stdError;
 
 
-pub async fn dump_database(url: &str) -> String {
+pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
     let pool = match sqlx::postgres::PgPool::connect(&url).await?;
 
     let row: Vec<(String, String, String, String, String,)> = sqlx::query_as("SELECT * FROM kunde")
