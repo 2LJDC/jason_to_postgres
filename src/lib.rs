@@ -20,7 +20,7 @@ pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
 
 
 
-pub async fn del_customer(status: &str, url: &str) -> Result<(), Box<dyn stdError>> {
+pub async fn del_customer_by_status(status: &str, url: &str) -> Result<(), Box<dyn stdError>> {
     let pool = sqlx::postgres::PgPool::connect(&url).await?;
 
     let query = "DELETE FROM kunde WHERE Status = $1";
