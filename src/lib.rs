@@ -1,7 +1,7 @@
 use std::error::Error as stdError;
 
 
-async pub fn dump_database(url: &str) -> String {
+pub async fn dump_database(url: &str) -> String {
     let pool = match sqlx::postgres::PgPool::connect(&url).await {
         Ok(p) => p,
         Err(_) => return "no database".to_string(),
@@ -24,7 +24,7 @@ async pub fn dump_database(url: &str) -> String {
 
 
 
-async fn del_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
+pub async fn del_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
     let pool = match sqlx::postgres::PgPool::connect(&url).await {
         Ok(p) => p,
         Err(e) => return Err(Box::new(e)),
@@ -48,7 +48,7 @@ async fn del_customer(c_string: String, url: String) -> Result<(), Box<dyn stdEr
 
 
 
-async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
+pub async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
     let pool = match sqlx::postgres::PgPool::connect(&url).await {
         Ok(p) => p,
         Err(e) => return Err(Box::new(e)),
