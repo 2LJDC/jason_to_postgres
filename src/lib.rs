@@ -33,6 +33,21 @@ pub async fn del_customer_by_status(status: &str, url: &str) -> Result<(), Box<d
 
 
 
+pub async fn del_customer(s: &str, url: &str) -> Result<(), Box<dyn stdError>> {
+    let pool = sqlx::postgres::PgPool::connect(&url).await?;
+
+    let data = json::parse(&s).unwrap();
+
+    //{id, vorname, nachname, mail, subscription, top, middl, bottom, status"}
+    let query = "DELETE FROM kunde WHERE Status = $1";
+
+    sqlx::query(query)
+        .bind(&status.to_string())
+        .execute(&pool).await?;
+    Ok(())
+}
+
+
 
 pub async fn add_customer(c_string: String, url: &str) -> Result<(), Box<dyn stdError>> {
     let pool = sqlx::postgres::PgPool::connect(&url).await?;
