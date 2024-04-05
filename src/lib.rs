@@ -20,10 +20,10 @@ pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
 
 
 
-pub async fn del_customer(status: &str, url: String) -> Result<(), Box<dyn stdError>> {
+pub async fn del_customer(status: &str, url: &str) -> Result<(), Box<dyn stdError>> {
     let pool = sqlx::postgres::PgPool::connect(&url).await?;
 
-    let query = "DELETE FROM kunde WHERE (Status) VALUES ($1)";
+    let query = "DELETE FROM kunde WHERE Status = $1";
 
     sqlx::query(query)
         .bind(&status.to_string())
@@ -34,7 +34,7 @@ pub async fn del_customer(status: &str, url: String) -> Result<(), Box<dyn stdEr
 
 
 
-pub async fn add_customer(c_string: String, url: String) -> Result<(), Box<dyn stdError>> {
+pub async fn add_customer(c_string: String, url: &str) -> Result<(), Box<dyn stdError>> {
     let pool = sqlx::postgres::PgPool::connect(&url).await?;
 
     let parts = c_string.split("|");
