@@ -1,5 +1,5 @@
 [package]
-name = "jason-test-1"
+name = "jason_to_postgres"
 version = "0.1.0"
 edition = "2021"
 
