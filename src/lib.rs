@@ -73,8 +73,10 @@ pub async fn del_customer(s: &str, url: &str) -> Result<(), Box<dyn stdError>> {
 pub async fn add_customer(c_string: String, url: &str) -> Result<(), Box<dyn stdError>> {
     let pool = sqlx::postgres::PgPool::connect(&url).await?;
 
-    let parts = c_string.split("|");
-    let data: Vec<&str> = parts.collect();
+    //let parts = c_string.split("|");
+    //let data: Vec<&str> = parts.collect();
+
+    let data = json::parse(&s).unwrap();
 
     //let query = "INSERT INTO kunde (Kundennummer, Name, Email, Nachricht, Status) VALUES ($1, $2, $3, $4, $5)";
     let query = "INSERT INTO kunde (id, vorname, nachname, mail, subscription, top, middl, bottom, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
