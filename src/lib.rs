@@ -11,8 +11,20 @@ pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
 
     for s in row {
         //let single_row = format!("{}|{}|{}|{}|{}\n", s.0, s.1, s.2, s.3, s.4);
-        let single_row = format!(r#"{\n id: "{}"\n vorname: "{}",\n nachneme: "{}",\n mail: "{},\n subscription:"{}",\n top: "{}",\n middl: "{}",\n bottom: "{}",\n status: "{}"\n } "#, s.0, s.1, s.2, s.3, s.4, s.5, s.6, s.7, s.8, s.9);
-        arr = format!("{arr}{single_row}");
+        //let single_row = format!(r#"{\n id: "{}"\n vorname: "{}",\n nachneme: "{}",\n mail: "{},\n subscription:"{}",\n top: "{}",\n middl: "{}",\n bottom: "{}",\n status: "{}"\n } "#, s.0, s.1, s.2, s.3, s.4, s.5, s.6, s.7, s.8, s.9);
+        let single_row = object!{
+            id: format!(r#""{}"", s.0),
+            vorname: format!(r#""{}"", s.1),
+            nachname: format!(r#""{}"", s.2),
+            mail: format!(r#""{}"", s.3),
+            subscription: format!(r#""{}"", s.4),
+            top: format!(r#""{}"", s.5),
+            middl: format!(r#""{}"", s.6),
+            bottom: format!(r#""{}"", s.7),
+            status: format!(r#""{}"", s.8),
+        };
+        
+        arr = format!("{arr}{:#}", single_row);
     }
 
     return Ok(arr)
