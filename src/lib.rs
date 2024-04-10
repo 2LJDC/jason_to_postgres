@@ -15,7 +15,7 @@ pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
         let single_row = object!{
             id: format!("{}{}{}",r#"""#, s.0, r#"""#),
             vorname: format!("{}{}{}",r#"""#, s.1, r#"""#),
-            nachname: format!("{}{}{}"",r#"""#, s.2, r#"""#),
+            nachname: format!("{}{}{}",r#"""#, s.2, r#"""#),
             mail: format!("{}{}{}",r#"""#, s.3, r#"""#),
             subscription: format!("{}{}{}",r#"""#, s.4, r#"""#),
             top: format!("{}{}{}",r#"""#, s.5, r#"""#),
