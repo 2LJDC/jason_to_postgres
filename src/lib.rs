@@ -27,7 +27,7 @@ pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
         arr = format!("{arr}{}", single_row);
     }
     
-    arr = format!("{arr}{}", single_row, "]}");
+    arr = format!("{}{}", arr, "]}");
     return Ok(arr)
 }
 
