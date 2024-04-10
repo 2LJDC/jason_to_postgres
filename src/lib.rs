@@ -14,14 +14,14 @@ pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
         //let single_row = format!(r#"{\n id: "{}"\n vorname: "{}",\n nachneme: "{}",\n mail: "{},\n subscription:"{}",\n top: "{}",\n middl: "{}",\n bottom: "{}",\n status: "{}"\n } "#, s.0, s.1, s.2, s.3, s.4, s.5, s.6, s.7, s.8, s.9);
         let single_row = object!{
             id: s.0,
-            vorname: format!("{}{}{}",r#"""#, s.1, r#"""#),
-            nachname: format!("{}{}{}",r#"""#, s.2, r#"""#),
-            mail: format!("{}{}{}",r#"""#, s.3, r#"""#),
-            subscription: format!("{}{}{}",r#"""#, s.4, r#"""#),
-            top: format!("{}{}{}",r#"""#, s.5, r#"""#),
-            middl: format!("{}{}{}",r#"""#, s.6, r#"""#),
-            bottom: format!("{}{}{}",r#"""#, s.7, r#"""#),
-            status: format!("{}{}{}",r#"""#, s.8, r#"""#),
+            vorname: s.1,
+            nachname: s.2,
+            mail: s.3,
+            subscription: s.4,
+            top: s.5,
+            middl: s.6,
+            bottom: s.7,
+            status: s.8,
         };
         
         arr = format!("{arr}{:#}", single_row);
