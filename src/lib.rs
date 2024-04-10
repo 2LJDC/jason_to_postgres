@@ -70,7 +70,7 @@ pub async fn del_customer(s: &str, url: &str) -> Result<(), Box<dyn stdError>> {
 
 
 
-pub async fn add_customer(c_string: String, url: &str) -> Result<(), Box<dyn stdError>> {
+pub async fn add_customer(s: String, url: &str) -> Result<(), Box<dyn stdError>> {
     let pool = sqlx::postgres::PgPool::connect(&url).await?;
 
     //let parts = c_string.split("|");
