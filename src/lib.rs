@@ -10,7 +10,8 @@ pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
     let mut arr = "".to_string();
 
     for s in row {
-        let single_row = format!("{}|{}|{}|{}|{}\n", s.0, s.1, s.2, s.3, s.4);
+        //let single_row = format!("{}|{}|{}|{}|{}\n", s.0, s.1, s.2, s.3, s.4);
+        let single_row = format!(r#"{\n id: "{}"\n vorname: "{}",\n nachneme: "{}",\n mail: "{},\n subscription:"{}",\n top: "{}",\n middl: "{}",\n bottom: "{}",\n status: "{}"\n } "#, s.0, s.1, s.2, s.3, s.4, s.5, s.6, s.7, s.8, s.9);
         arr = format!("{arr}{single_row}");
     }
 
