@@ -64,14 +64,29 @@ pub async fn add_customer(c_string: String, url: &str) -> Result<(), Box<dyn std
     let parts = c_string.split("|");
     let data: Vec<&str> = parts.collect();
 
-    let query = "INSERT INTO kunde (Kundennummer, Name, Email, Nachricht, Status) VALUES ($1, $2, $3, $4, $5)";
+    //let query = "INSERT INTO kunde (Kundennummer, Name, Email, Nachricht, Status) VALUES ($1, $2, $3, $4, $5)";
+    let query = "INSERT INTO kunde (id, vorname, nachname, mail, subscription, top, middl, bottom, status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
+
     sqlx::query(query)
-        .bind("0".to_string())
+        .bind(&data["id"].to_string())
+        .bind(&data["vorname"].to_string())
+        .bind(&data["nachname"].to_string())
+        .bind(&data["mail"].to_string())
+        .bind(&data["subscription"].to_string())
+        .bind(&data["top"].to_string())
+        .bind(&data["middl"].to_string())
+        .bind(&data["bottom"].to_string())
+        .bind(&data["status"].to_string())
+        .execute(&pool).await?;
+    Ok(())
+}
+        /*.bind("0".to_string())
         .bind(&data[0].to_string())
         .bind(&data[1].to_string())
         .bind(&data[2].to_string())
         .bind("nix".to_string())
         .execute(&pool).await?;
     Ok(())
-}
+    */
+//}
 
