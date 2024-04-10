@@ -13,15 +13,15 @@ pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
         //let single_row = format!("{}|{}|{}|{}|{}\n", s.0, s.1, s.2, s.3, s.4);
         //let single_row = format!(r#"{\n id: "{}"\n vorname: "{}",\n nachneme: "{}",\n mail: "{},\n subscription:"{}",\n top: "{}",\n middl: "{}",\n bottom: "{}",\n status: "{}"\n } "#, s.0, s.1, s.2, s.3, s.4, s.5, s.6, s.7, s.8, s.9);
         let single_row = object!{
-            id: format!({}{}{},r#"""#, s.0, r#"""#),
-            vorname: format!({}{}{},r#"""#, s.1, r#"""#),
-            nachname: format!({}{}{},r#"""#, s.2, r#"""#),
-            mail: format!({}{}{},r#"""#, s.3, r#"""#),
-            subscription: format!({}{}{},r#"""#, s.4, r#"""#),
-            top: format!({}{}{},r#"""#, s.5, r#"""#),
-            middl: format!({}{}{},r#"""#, s.6, r#"""#),
-            bottom: format!({}{}{},r#"""#, s.7, r#"""#),
-            status: format!({}{}{},r#"""#, s.8, r#"""#),
+            id: format!("{}{}{}",r#"""#, s.0, r#"""#),
+            vorname: format!("{}{}{}",r#"""#, s.1, r#"""#),
+            nachname: format!("{}{}{}"",r#"""#, s.2, r#"""#),
+            mail: format!("{}{}{}",r#"""#, s.3, r#"""#),
+            subscription: format!("{}{}{}",r#"""#, s.4, r#"""#),
+            top: format!("{}{}{}",r#"""#, s.5, r#"""#),
+            middl: format!("{}{}{}",r#"""#, s.6, r#"""#),
+            bottom: format!("{}{}{}",r#"""#, s.7, r#"""#),
+            status: format!("{}{}{}",r#"""#, s.8, r#"""#),
         };
         
         arr = format!("{arr}{:#}", single_row);
