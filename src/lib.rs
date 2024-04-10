@@ -23,7 +23,7 @@ pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
             bottom: s.7,
             status: s.8,
         };
-        arr.pop;
+        arr.pop();
         arr = format!("{arr}{},", single_row);
     }
     
