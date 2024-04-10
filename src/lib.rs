@@ -7,7 +7,7 @@ pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
     let row: Vec<(String, String, String, String, String, String, String, String, String)> = sqlx::query_as("SELECT * FROM kunde")
         .fetch_all(&pool).await?;
 
-    let mut arr = "{ arr:[".to_string();
+    let mut arr = "{arr:[".to_string();
 
     for s in row {
         //let single_row = format!("{}|{}|{}|{}|{}\n", s.0, s.1, s.2, s.3, s.4);
