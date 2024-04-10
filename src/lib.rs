@@ -4,7 +4,7 @@ use json::object;
 pub async fn dump_database(url: &str) -> Result<String, Box<dyn stdError>> {
     let pool = sqlx::postgres::PgPool::connect(&url).await?;
 
-    let row: Vec<(String, String, String, String, String,)> = sqlx::query_as("SELECT * FROM kunde")
+    let row: Vec<(String, String, String, String, String, String, String, String, String)> = sqlx::query_as("SELECT * FROM kunde")
         .fetch_all(&pool).await?;
 
     let mut arr = "".to_string();
