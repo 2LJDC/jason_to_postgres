@@ -48,7 +48,7 @@ pub async fn del_customer_by_status(status: &str, url: &str) -> Result<(), Box<d
 
 
 
-pub async fn del_customer(s: &str, url: &str) -> Result<(), Box<dyn stdError>> {
+pub async fn del_customer(s: String, url: &str) -> Result<(), Box<dyn stdError>> {
     let pool = sqlx::postgres::PgPool::connect(&url).await?;
 
     let data = json::parse(&s).unwrap();
